@@ -33,6 +33,5 @@ public class Logger {
 
     public void info(String message) {
         logger.info(message);
-
     }
 }

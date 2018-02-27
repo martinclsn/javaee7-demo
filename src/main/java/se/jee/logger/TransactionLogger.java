@@ -12,7 +12,7 @@ public class TransactionLogger {
     @AroundInvoke
     public Object aroundInvoke(InvocationContext invocationContext) throws Exception {
         Object result = invocationContext.proceed();
-        Thread.sleep(1000);
+        Thread.sleep(500);
         logger.logTxStatus();
         return result;
     }

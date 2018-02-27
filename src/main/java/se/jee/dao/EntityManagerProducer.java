@@ -31,8 +31,8 @@ public class EntityManagerProducer {
     void closeMyObject(@Disposes EntityManager entityManager) {
         if(entityManager.isOpen()) {
             entityManager.close();
+            logger.info("EntityManager closed: " + entityManager);
         }
-        logger.info("EntityManager closed: " + entityManager);
     }
 
 }
