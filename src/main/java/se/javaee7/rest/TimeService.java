@@ -1,7 +1,10 @@
 package se.javaee7.rest;
 
+import org.apache.log4j.Logger;
+import se.javaee7.ejb.TimeEjbDao;
+import se.javaee7.entity.TimeEntity;
+
 import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -9,7 +12,6 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.time.LocalDateTime;
-import java.util.logging.Logger;
 
 @Path("time")
 @Produces(MediaType.APPLICATION_JSON)
@@ -19,15 +21,16 @@ public class TimeService {
     @Inject
     Logger logger;
 
+    @Inject
+    TimeEjbDao timeEjbDao;
+
     @Path("now")
     @GET
     public Response now() {
-        Now now = new Now();
-        logger.info("Returning " + now.time);
-        return Response.ok(now).build();
+        TimeEntity timeEntity = new TimeEntity(LocalDateTime.now().toString());
+        timeEntity = timeEjbDao.save(timeEntity);
+        logger.info("Returning " + timeEntity.getTime());
+        return Response.ok(timeEntity).build();
     }
 
-    public static class Now {
-        public String time = LocalDateTime.now().toString();
-    }
 }
