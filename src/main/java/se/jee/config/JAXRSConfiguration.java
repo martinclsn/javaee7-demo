@@ -1,4 +1,4 @@
-package se.javaee7.config;
+package se.jee.config;
 
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;

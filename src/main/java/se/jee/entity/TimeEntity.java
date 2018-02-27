@@ -1,4 +1,4 @@
-package se.javaee7.entity;
+package se.jee.entity;
 
 import javax.persistence.*;
 
@@ -8,7 +8,7 @@ public class TimeEntity {
     @Id
     @GeneratedValue(generator="timeSeq")
     @SequenceGenerator(name="timeSeq",sequenceName="TIME_ID_SEQ")
-    private String id;
+    private long id;
 
     String time;
 
@@ -27,11 +27,19 @@ public class TimeEntity {
         this.time = time;
     }
 
-    public String getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(long id) {
         this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return "TimeEntity{" +
+                "id=" + id +
+                ", time='" + time + '\'' +
+                '}';
     }
 }

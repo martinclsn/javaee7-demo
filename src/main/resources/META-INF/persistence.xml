@@ -7,7 +7,7 @@
     <persistence-unit name="oracle" transaction-type="JTA">
         <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
         <jta-data-source>oracle-data-source</jta-data-source>
-        <class>se.javaee7.entity.TimeEntity</class>
+        <class>se.jee.entity.TimeEntity</class>
         <properties>
             <property name="eclipselink.deploy-on-startup" value="true" />
             <property name="eclipselink.ddl-generation" value="drop-and-create-tables"/>
