@@ -23,9 +23,9 @@ public class StartupEjb {
         fa.setName("FileLogger");
         String logFile = System.getProperty("user.dir") + File.separator + "demo.log";
         fa.setFile(logFile);
-        fa.setLayout(new PatternLayout("%d %-5p [%t] [%c{1}] %m%n"));
+        fa.setLayout(new PatternLayout("%d{ABSOLUTE} %-5p [%t] [%c{1}] %m%n"));
         fa.setThreshold(Level.DEBUG);
-        fa.setAppend(false);
+        fa.setAppend(false); //truncate file
         fa.activateOptions();
         Logger.getRootLogger().addAppender(fa);
         System.out.println("Logging to file: " + logFile);
