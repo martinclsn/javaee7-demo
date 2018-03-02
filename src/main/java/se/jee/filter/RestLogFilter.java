@@ -1,6 +1,6 @@
 package se.jee.filter;
 
-import se.jee.logger.Logger;
+import org.apache.log4j.Logger;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -20,12 +20,14 @@ public class RestLogFilter implements ContainerRequestFilter, ContainerResponseF
 
     @Override
     public void filter(ContainerRequestContext reqContext) throws IOException {
-        logger.info("Request matched resources: " + String.valueOf(reqContext.getUriInfo().getMatchedResources()));
+        logger.info("Request matched resources: " + reqContext.getUriInfo().getMatchedResources());
     }
 
     @Override
     public void filter(ContainerRequestContext reqContext,
                        ContainerResponseContext resContext) throws IOException {
+        logger.info("Returning: " + resContext.getEntity());
+
     }
 
 }

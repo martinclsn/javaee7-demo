@@ -15,7 +15,7 @@ import java.io.File;
 @Singleton
 public class StartupEjb {
 
-    private Logger logger = Logger.getLogger(getClass());
+    private static final Logger logger = Logger.getLogger(StartupEjb.class);
 
     @PostConstruct
     public void startingUp() {

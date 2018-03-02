@@ -1,6 +1,6 @@
 package se.jee.dao;
 
-import se.jee.logger.Logger;
+import org.apache.log4j.Logger;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.RequestScoped;

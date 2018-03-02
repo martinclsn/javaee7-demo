@@ -1,6 +1,6 @@
 package se.jee.filter;
 
-import se.jee.logger.Logger;
+import org.apache.log4j.Logger;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -16,7 +16,7 @@ import java.net.URI;
 @Provider
 @PreMatching
 @ApplicationScoped
-public class RestPreMatcher implements ContainerRequestFilter {
+public class RestPreMatchingFilter implements ContainerRequestFilter {
 
     @Inject
     Logger logger;

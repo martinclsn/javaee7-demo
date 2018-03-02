@@ -1,18 +1,20 @@
 package se.jee.dao.cdi;
 
-import se.jee.logger.TransactionLogger;
+import org.apache.log4j.Logger;
 import se.jee.entity.TimeEntity;
-import se.jee.logger.Logger;
+import se.jee.logger.DaoLoggerInterceptor;
 
 import javax.enterprise.context.RequestScoped;
+import javax.enterprise.event.Event;
 import javax.inject.Inject;
 import javax.interceptor.Interceptors;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
+import java.util.Optional;
 
 @RequestScoped //Since EntityManager is not thread-safe
-@Interceptors(TransactionLogger.class)
+@Interceptors(DaoLoggerInterceptor.class)
 public class ContainerManagedEmDao {
 
     @PersistenceContext
@@ -21,16 +23,21 @@ public class ContainerManagedEmDao {
     @Inject
     Logger logger;
 
+    @Inject
+    Event<TimeEntity> event;
+
     @Transactional
     public TimeEntity save(TimeEntity timeEntity) {
-        logger.logTxStatus();
         em.persist(timeEntity);
+        event.fire(timeEntity);
         return timeEntity;
     }
 
-    public TimeEntity findById(long id) {
-        logger.logTxStatus();
-        return em.find(TimeEntity.class, id);
+    public Optional<TimeEntity> findById(long id) {
+        Optional<TimeEntity> entityOptional = Optional.ofNullable(em.find(TimeEntity.class, id));
+        entityOptional.ifPresent(entity -> event.fire(entity));
+        return entityOptional;
     }
+
 
 }
