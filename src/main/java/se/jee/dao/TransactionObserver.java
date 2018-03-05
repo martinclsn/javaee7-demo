@@ -26,7 +26,7 @@ public class TransactionObserver {
         logTxStatus();
     }
 
-    public void slowTransaction(@Observes(during = IN_PROGRESS) TimeEntity timeEntity) throws Exception {
+    public void slowOperation(@Observes(during = IN_PROGRESS) TimeEntity timeEntity) throws Exception {
         logTxStatus();
         Thread.sleep(3000);
     }
